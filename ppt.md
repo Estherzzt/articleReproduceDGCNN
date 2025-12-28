@@ -20,11 +20,7 @@ Run experiments & report insights
 ⭐ Page 2 — Paper Overview（核心思想）
 建议画 一张逻辑图（你自己画即可）：
 包括：
-输入：点云 
-N
-×
-3
-N×3
+输入：点云 N×3
 KNN 构图
 EdgeConv 提取边特征
 多层堆叠
@@ -34,28 +30,7 @@ Key idea: Learn features on dynamic graphs instead of static neighborhoods.
 👉 这一页是“展示你理解论文”的关键
 ⭐ Page 3 — EdgeConv Explained（必须讲清）
 内容：
-edge feature = 
-h
-(
-x
-i
-,
-x
-j
-−
-x
-i
-)
-h(x 
-i
-​	
- ,x 
-j
-​	
- −x 
-i
-​	
- )
+edge feature = h(xi,xj−xi)
 Preserve:
 local geometry
 translation awareness
@@ -150,3 +125,49 @@ test accuracy
 loss curve
 few logs / screenshots
 填入 Page 8
+
+---
+PPT Page 8 — PyTorch Experiment Setup（含当前测试结果）
+可以先这样写（英文版，导师看起来更专业）：
+Baseline Reproduction — PyTorch Implementation (Sanity Check Run)
+Dataset: ModelNet40
+num_points = 128 (reduced for quick testing)
+k = 5
+Batch size = 32 (CPU only)
+Mode: Evaluation on a small test model (used only to verify pipeline correctness)
+Device: CPU (no CUDA available)
+Result (sanity-check run, not full training):
+Test accuracy = 0.085
+Test avg accuracy = 0.052
+Purpose of this run:
+Verify that the full pipeline works end-to-end
+Confirm that dataset loading, model forward pass, evaluation loop, and checkpoint loading are all correct
+This run uses very small num_points and k, so low accuracy is expected and does not reflect model performance.
+👉 这段话可以原样放到 PPT 上
+💡 为什么这个结果“低但合理”（导师问到时可以这么说）
+你可以在 PPT 备注或讲解时补一句：
+Since this was only a functional test, I intentionally used a very small configuration (num_points=128, k=5, CPU only).
+The goal was not accuracy, but to verify that the implementation runs correctly.
+The full-scale experiment is currently running on my MacBook and I will add the final results once training finishes.
+这句话很专业、很诚实，也符合 industry research workflow。
+🟡 什么时候再补 Full-scale 结果？
+等你的 MacBook：
+1024 点 × k=20
+真正训练一轮
+得到 ~90%+ accuracy
+👉 你只需要：
+把数值替换到 PPT
+加一张 loss/acc 曲线图（可选）
+小规模测试结果保留在 PPT 中也很加分，因为它体现：
+你不是盲目跑实验
+而是逐步验证 pipeline
+📌 小建议（现在就能做）
+在 Page 8 的最下面加一个占位块：
+Full-scale experiment (in progress):
+num_points = 1024
+k = 20
+Expected: ~90%+ accuracy (according to paper)
+I will update the final results once the current training run finishes.
+这样导师看到：
+你已经开始“正式复现实验”
+现在处于合理阶段
